@@ -53,7 +53,7 @@ public class StockSlectorBaseCollector extends AbstractCollector<List<Stock>> {
         String target = URLMapper.STOCK_SELECTOR_JSON.toString();
         URL url = new URL(target + head.generateQuotaRequest());
 
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         return processNode(node);
 

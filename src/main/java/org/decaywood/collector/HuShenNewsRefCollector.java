@@ -92,7 +92,7 @@ public class HuShenNewsRefCollector extends AbstractCollector<List<URL>> {
                                 .addParameter("page", i);
 
                         URL url = new URL(builder.build());
-                        String json = request(url);
+                        String json = requestGet(url);
                         node = mapper.readTree(json);
                         nodeList.add(node);
                         break;

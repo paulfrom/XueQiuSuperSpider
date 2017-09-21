@@ -1,14 +1,26 @@
 package org.decaywood.utils;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipException;
+import java.util.zip.ZipInputStream;
 
 /**
  * @author: decaywood
@@ -64,7 +76,12 @@ public class HttpRequestHelper {
                 httpURLConn.setRequestProperty(entry.getKey(), entry.getValue());
             httpURLConn.connect();
             InputStream in = httpURLConn.getInputStream();
-            if (gzip) in = new GZIPInputStream(in);
+            try {
+                if (gzip) in = new GZIPInputStream(in);
+            }catch (ZipException ex){
+                in = new ZipInputStream(in);
+            }
+
             BufferedReader bd = new BufferedReader(new InputStreamReader(in));
             StringBuilder builder = new StringBuilder();
             String text;
@@ -75,5 +92,42 @@ public class HttpRequestHelper {
         }
     }
 
+    public String clientPostRequest(URL url){
+        try( CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpPost httpPost = new HttpPost();
+            httpPost.setHeader("Cookie",FileLoader.loadCookie("xxxx"));
+            httpPost.setURI(url.toURI());
+            CloseableHttpResponse response = httpClient.execute(httpPost);
+            if(response != null) {
+                HttpEntity entity = response.getEntity();
+                return EntityUtils.toString(entity);
+            }
+            return null;
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+
+    public String clientGetRequest(URL url){
+        try( CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpGet httpGet = new HttpGet();
+            httpGet.setHeader("Cookie",FileLoader.loadCookie("xxxx"));
+            httpGet.setURI(url.toURI());
+            CloseableHttpResponse response = httpClient.execute(httpGet);
+            if(response != null) {
+                HttpEntity entity = response.getEntity();
+                return EntityUtils.toString(entity);
+            }
+            return null;
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

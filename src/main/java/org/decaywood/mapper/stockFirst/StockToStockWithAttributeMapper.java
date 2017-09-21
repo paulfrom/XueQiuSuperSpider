@@ -7,9 +7,11 @@ import org.decaywood.timeWaitingStrategy.TimeWaitingStrategy;
 import org.decaywood.utils.EmptyObject;
 import org.decaywood.utils.RequestParaBuilder;
 import org.decaywood.utils.URLMapper;
+import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.Date;
 
 /**
  * @author: decaywood
@@ -43,7 +45,7 @@ public class StockToStockWithAttributeMapper extends AbstractMapper<Stock, Stock
         RequestParaBuilder builder = new RequestParaBuilder(target)
                 .addParameter("code", stock.getStockNo());
         URL url = new URL(builder.build());
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         node = node.get(stock.getStockNo());
 
@@ -52,8 +54,8 @@ public class StockToStockWithAttributeMapper extends AbstractMapper<Stock, Stock
         stock.setCurrent(node.get("current").asText());
         stock.setVolume(node.get("volume").asText());
         stock.setPercentage(node.get("percentage").asText());
-        stock.setChange(node.get("change").asText());
-        stock.setOpen(node.get("open").asText());
+        stock.setChangeAmt(node.get("change").asText());
+        stock.setOpenAmt(node.get("open").asText());
         stock.setHigh(node.get("high").asText());
         stock.setLow(node.get("low").asText());
         stock.setAmplitude(node.get("amplitude").asText());
@@ -72,14 +74,13 @@ public class StockToStockWithAttributeMapper extends AbstractMapper<Stock, Stock
         stock.setPe_ttm(node.get("pe_ttm").asText());
         stock.setPe_lyr(node.get("pe_lyr").asText());
         stock.setDividend(node.get("dividend").asText());
-        stock.setPsr(node.get("psr").asText());
+        if(node.get("psr")!=null){
+            stock.setPsr(node.get("psr").asText());
+        }
         stock.setTurnover_rate(node.get("turnover_rate").asText());
         stock.setAmount(node.get("amount").asText());
+        stock.setStockQueryDate(new Date());
         return stock;
 
     }
-
-
-
-
 }

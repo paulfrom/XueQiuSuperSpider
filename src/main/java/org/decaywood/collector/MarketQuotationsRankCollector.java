@@ -124,7 +124,7 @@ public class MarketQuotationsRankCollector extends AbstractCollector<List<Stock>
                 .addParameter("column", "symbol%2Cname");
         URL url = new URL(builder.build());
 
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         return processNode(node);
     }

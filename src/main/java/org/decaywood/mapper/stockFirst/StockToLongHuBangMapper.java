@@ -55,7 +55,7 @@ public class StockToLongHuBangMapper extends AbstractMapper <Stock, LongHuBangIn
                 .addParameter("symbol", stock.getStockNo());
         URL url = new URL(builder.build());
 
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         return processNode(stock, node);
 

@@ -51,7 +51,7 @@ public class StockToCapitalFlowEntryMapper extends AbstractMapper<Stock, Entry<S
                 .addParameter("symbol", no);
         URL url = new URL(builder.build());
 
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         return processNode(stock, node);
 

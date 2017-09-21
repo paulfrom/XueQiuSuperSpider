@@ -54,7 +54,7 @@ public class IndustryToStocksMapper extends AbstractMapper<Industry, List<Stock>
         }
         URL url = new URL(builder.build());
 
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode jsonNode = mapper.readTree(json);
 
         return parserJson(jsonNode);

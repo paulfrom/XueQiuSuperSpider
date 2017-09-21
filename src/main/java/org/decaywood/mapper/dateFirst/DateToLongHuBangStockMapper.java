@@ -45,7 +45,7 @@ public class DateToLongHuBangStockMapper extends AbstractMapper<Date, List<Stock
         RequestParaBuilder builder = new RequestParaBuilder(target)
                 .addParameter("date", dateParam);
         URL url = new URL(builder.build());
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         return processNode(node, date);
 

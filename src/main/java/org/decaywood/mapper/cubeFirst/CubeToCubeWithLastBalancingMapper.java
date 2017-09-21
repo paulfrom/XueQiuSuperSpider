@@ -61,7 +61,7 @@ public class CubeToCubeWithLastBalancingMapper extends AbstractMapper<Cube, Cube
                 .addParameter("count", count)
                 .addParameter("page", 1);
         URL url = new URL(builder.build());
-        String json = request(url);
+        String json = requestGet(url);
 
         JsonNode node = mapper.readTree(json);
         processCube(cube, node);

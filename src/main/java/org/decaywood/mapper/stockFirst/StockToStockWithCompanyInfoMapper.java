@@ -51,7 +51,7 @@ public class StockToStockWithCompanyInfoMapper extends AbstractMapper <Stock, St
 
         String target = URLMapper.COMPREHENSIVE_PAGE.toString();
 
-        String content = request(new URL(target));
+        String content = requestGet(new URL(target));
         Document doc = Jsoup.parse(content);
         Elements element = doc.getElementsByClass("second-nav")
                 .get(1).children()
@@ -84,7 +84,7 @@ public class StockToStockWithCompanyInfoMapper extends AbstractMapper <Stock, St
                 .addParameter("symbol", stock.getStockNo());
 
         URL url = new URL(builder.build());
-        String json = request(url);
+        String json = requestGet(url);
 
         JsonNode node = mapper.readTree(json).get("tqCompInfo");
         processStock(stock, node);

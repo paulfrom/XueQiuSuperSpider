@@ -24,7 +24,7 @@ public abstract class FileLoader {
      */
     public static String loadCookie(String key) {
         if(cookie.containsKey(key)) return cookie.get(key);
-        return EmptyObject.emptyString;
+        return "aliyungf_tc=AQAAADJ5HBZ9ow4Aam5fZZb4OUohw5q1; device_id=28495a45d3d6577d642e7244600a8794; remember=1; remember.sig=K4F3faYzmVuqC0iXIERCQf55g2Y; xq_a_token=33af30c6b9ef1df9548a4cc57089281e67c4da6c; xq_a_token.sig=JCGEngaNapPM9nUCJ6KVtCoipI8; xq_r_token=43cc430dcc418d08be4c009d897d00a7beeac5d2; xq_r_token.sig=ZYlc7KgvldhMJJaNJqd7GmRPQ1k; xq_is_login=1; xq_is_login.sig=J3LxgPVPUzbBg3Kee_PquUfih7Q; u=5499852316; u.sig=gDQ4yzeMrcEpajmUsnIeexPeqC8; s=f21a6iqu2x; bid=e1597e4c3067dd251c5130e8a0e0e73f_j7tuh692; __utma=1.1963207638.1505961347.1505961347.1505961347.1; __utmc=1; __utmz=1.1505961347.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); Hm_lvt_1db88642e346389874251b5a1eded6e3=1505961300; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1505961372; snbim_minify=true";
     }
 
 

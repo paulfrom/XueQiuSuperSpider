@@ -1,29 +1,46 @@
 package org.decaywood.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.decaywood.entity.trend.ShareHoldersTrend;
 import org.decaywood.entity.trend.StockTrend;
 import org.decaywood.utils.DateParser;
 import org.decaywood.utils.EmptyObject;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * @author: decaywood
  * @date: 2015/11/23 19:14
  */
+@Table(name = "stockDetail")
 public class Stock implements DeepCopy<Stock> {
 
+    @Transient
     private static final String Stock_Page_PreFix = "http://xueqiu.com/S/";
 
-    private final String stockName; //股票名称
-    private final String stockNo; //股票代码
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Setter
+    @Getter
+    private Long id;
 
+
+    @Getter
+    @Setter
+    private String stockName; //股票名称
+    @Getter
+    @Setter
+    private String stockNo; //股票代码
+
+    @Transient
     private String currency_unit = EmptyObject.emptyString;//币种
     private String current = EmptyObject.emptyString; //当前价
     private String volume = EmptyObject.emptyString;//成交量
     private String percentage = EmptyObject.emptyString;//百分比
-    private String change = EmptyObject.emptyString;//涨跌幅
-    private String open = EmptyObject.emptyString;//开盘价
+    private String changeAmt = EmptyObject.emptyString;//涨跌幅
+    private String openAmt = EmptyObject.emptyString;//开盘价
     private String high = EmptyObject.emptyString;//最高
     private String low = EmptyObject.emptyString;//最低
     private String amplitude = EmptyObject.emptyString;//振幅
@@ -49,9 +66,13 @@ public class Stock implements DeepCopy<Stock> {
 
     private Date stockQueryDate = EmptyObject.emptyDate;
 
+    @Transient
     private StockTrend stockTrend = EmptyObject.emptyStockTrend;//股票走势
+    @Transient
     private ShareHoldersTrend shareHoldersTrend = EmptyObject.emptyShareHoldersTrend;//股票股东变动情况
+    @Transient
     private CompanyInfo companyInfo = EmptyObject.emptyCompanyInfo;//公司信息
+    @Transient
     private Industry industry = EmptyObject.emptyIndustry;//所属行业
 
 
@@ -60,10 +81,12 @@ public class Stock implements DeepCopy<Stock> {
      * @param stockName 股票名称
      * @param stockNo 股票代码
      */
-    public Stock(final String stockName, final String stockNo) {
+    public Stock(String stockName, String stockNo) {
         this.stockName = stockName;
         this.stockNo = stockNo;
     }
+
+    public Stock(){};
 
 
 
@@ -116,23 +139,23 @@ public class Stock implements DeepCopy<Stock> {
     }
 
     //涨跌幅
-    public String getChange() {
-        return change;
+    public String getChangeAmt() {
+        return changeAmt;
     }
 
     //涨跌幅
-    public void setChange(String change) {
-        this.change = change;
+    public void setChangeAmt(String changeAmt) {
+        this.changeAmt = changeAmt;
     }
 
     //开盘价
-    public String getOpen() {
-        return open;
+    public String getOpenAmt() {
+        return openAmt;
     }
 
     //开盘价
-    public void setOpen(String open) {
-        this.open = open;
+    public void setOpenAmt(String openAmt) {
+        this.openAmt = openAmt;
     }
 
     //最高
@@ -424,8 +447,8 @@ public class Stock implements DeepCopy<Stock> {
         stock.current = current;
         stock.volume = volume;
         stock.percentage = percentage;
-        stock.change = change;
-        stock.open = open;
+        stock.changeAmt = changeAmt;
+        stock.openAmt = openAmt;
         stock.high = high;
         stock.low = low;
         stock.amplitude = amplitude;

@@ -38,7 +38,7 @@ public class PageKeyFilter extends AbstractFilter<URL> {
     protected boolean filterLogic(URL url) throws Exception {
         if (url == null) return false;
 
-        String pageContent = request(url);
+        String pageContent = requestGet(url);
         boolean res;
 
         if(regex) {

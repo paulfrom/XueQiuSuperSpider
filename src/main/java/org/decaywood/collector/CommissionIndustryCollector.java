@@ -41,7 +41,7 @@ public class CommissionIndustryCollector extends AbstractCollector<List<Industry
 
         String target = URLMapper.COMPREHENSIVE_PAGE.toString();
 
-        String content = request(new URL(target));
+        String content = requestGet(new URL(target));
         Document doc = Jsoup.parse(content);
         Elements element = doc.getElementsByClass("second-nav")
                 .get(1).children()

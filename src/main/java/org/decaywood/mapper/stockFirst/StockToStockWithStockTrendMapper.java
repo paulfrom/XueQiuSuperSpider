@@ -76,7 +76,7 @@ public class StockToStockWithStockTrendMapper extends AbstractMapper<Stock, Stoc
 
         URL url = new URL(builder.build());
 
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json).get("chartlist");
         processStock(stock, node);
         return stock;

@@ -94,7 +94,7 @@ public class StockScopeHotRankCollector extends AbstractCollector<List<Stock>> {
                 .addParameter("_type", scope.getScope())
                 .addParameter("type", scope.getTime());
         URL url = new URL(builder.build());
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         return processNode(node);
 

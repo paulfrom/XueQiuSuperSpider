@@ -145,7 +145,7 @@ public class StreamTest {
         List<Stock> stocks = collector.get().parallelStream().map(mapper1.andThen(mapper2)).collect(Collectors.toList());
         for (Stock stock : stocks) {
             System.out.print(stock.getStockName() + " -> ");
-            System.out.print(stock.getAmplitude() + " " + stock.getOpen() + " " + stock.getHigh() + " and so on...");
+            System.out.print(stock.getAmplitude() + " " + stock.getOpenAmt() + " " + stock.getHigh() + " and so on...");
             System.out.println(" trend size: " + stock.getStockTrend().getHistory().size());
         }
     }
@@ -170,7 +170,7 @@ public class StreamTest {
         for (Map.Entry<Industry, List<Stock>> entry : res.entrySet()) {
             for (Stock stock : entry.getValue()) {
                 System.out.print(entry.getKey().getIndustryName() + " -> " + stock.getStockName() + " -> ");
-                System.out.print(stock.getAmount() + " " + stock.getChange() + " " + stock.getDividend() + " and so on...");
+                System.out.print(stock.getAmount() + " " + stock.getChangeAmt() + " " + stock.getDividend() + " and so on...");
                 System.out.println(" trend size: " + stock.getStockTrend().getHistory().size());
             }
         }

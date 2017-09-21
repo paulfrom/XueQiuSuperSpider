@@ -67,7 +67,7 @@ public class CubeToCubeWithTrendMapper extends AbstractMapper<Cube, Cube> {
 
         URL url = new URL(builder.build());
 
-        String json = request(url);
+        String json = requestGet(url);
 
         JsonNode node = mapper.readTree(json);
         processCube(cube, node);

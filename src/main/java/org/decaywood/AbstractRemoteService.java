@@ -62,8 +62,12 @@ public abstract class AbstractRemoteService extends UnicastRemoteObject {
         return RMIOnly;
     }
 
-    protected String request(URL url) throws IOException {
-        return new HttpRequestHelper(webSite).request(url);
+    protected String requestPost(URL url) throws IOException {
+        return new HttpRequestHelper(webSite).clientPostRequest(url);
+    }
+
+    protected String requestGet(URL url) throws IOException {
+        return new HttpRequestHelper(webSite).clientGetRequest(url);
     }
 
 

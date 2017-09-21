@@ -51,10 +51,10 @@ public class StockToStockWithAttributeMapperTest {
         Assert.assertNotEquals(stock.getLow52week(), EmptyObject.emptyString);
         Assert.assertNotEquals(stock.getStockName(), EmptyObject.emptyString);
         Assert.assertNotEquals(stock.getCurrency_unit(), EmptyObject.emptyString);
-        Assert.assertNotEquals(stock.getChange(), EmptyObject.emptyString);
+        Assert.assertNotEquals(stock.getChangeAmt(), EmptyObject.emptyString);
         Assert.assertNotEquals(stock.getClose(), EmptyObject.emptyString);
         Assert.assertNotEquals(stock.getCurrent(), EmptyObject.emptyString);
-        Assert.assertNotEquals(stock.getOpen(), EmptyObject.emptyString);
+        Assert.assertNotEquals(stock.getOpenAmt(), EmptyObject.emptyString);
         Assert.assertNotEquals(stock.getPercentage(), EmptyObject.emptyString);
         Assert.assertNotEquals(stock.getEps(), EmptyObject.emptyString);
         Assert.assertNotEquals(stock.getLow(), EmptyObject.emptyString);

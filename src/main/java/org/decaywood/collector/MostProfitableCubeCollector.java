@@ -108,7 +108,7 @@ public class MostProfitableCubeCollector extends  AbstractCollector<List<Cube>> 
                 .addParameter("profit", order_by.toString());
 
         URL url = new URL(builder.build());
-        String json = request(url);
+        String json = requestGet(url);
         JsonNode node = mapper.readTree(json);
         return processNode(node);
     }

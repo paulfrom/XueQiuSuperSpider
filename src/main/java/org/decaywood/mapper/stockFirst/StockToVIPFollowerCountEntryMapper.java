@@ -75,7 +75,7 @@ public class StockToVIPFollowerCountEntryMapper extends AbstractMapper <Stock, E
             while (true) {
                 try {
 
-                    content = request(url);
+                    content = requestGet(url);
                     break;
 
                 } catch (Exception e) {
