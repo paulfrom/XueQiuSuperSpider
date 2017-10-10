@@ -1,5 +1,6 @@
 package org.decaywood.mapper;
 
+import lombok.extern.slf4j.Slf4j;
 import org.decaywood.AbstractRemoteService;
 import org.decaywood.CookieProcessor;
 import org.decaywood.entity.DeepCopy;
@@ -16,7 +17,7 @@ import java.util.function.Function;
  * @author: decaywood
  * @date: 2015/11/24 16:56
  */
-
+@Slf4j
 public abstract class AbstractMapper <T, R> extends AbstractRemoteService implements
         Function<T, R>,
         RemoteMapper<T, R>,
@@ -59,7 +60,7 @@ public abstract class AbstractMapper <T, R> extends AbstractRemoteService implem
                         break;
                     } catch (Exception e) {
                         if (!(e instanceof IOException)) throw e;
-                        System.out.println("Mapper: Network busy Retrying -> " + loopTime + " times" + "  " + this.getClass().getSimpleName());
+                        log.info("Mapper: Network busy Retrying -> " + loopTime + " times" + "  " + this.getClass().getSimpleName());
                         updateCookie(webSite);
                         this.strategy.waiting(loopTime++);
                     }

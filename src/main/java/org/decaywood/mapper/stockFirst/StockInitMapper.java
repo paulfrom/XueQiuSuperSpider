@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -56,14 +57,16 @@ public class StockInitMapper extends AbstractMapper<List<StockInfo>, List<StockI
     @Override
     public List<StockInfo> mapLogic(List<StockInfo> stock) throws Exception {
 
-        int code = 60110;
-        while (code != 60199) {
+        DecimalFormat decimalFormat = new DecimalFormat("00000");
+
+        int code = 1;
+        while (code != 291) {
             Thread.sleep(1000);
             code=code+1;
             try {
                 String target = URLMapper.SEARCH_STOCK.toString();
                 RequestParaBuilder builder = new RequestParaBuilder(target)
-                        .addParameter("size", 10).addParameter("code", "sh"+code);
+                        .addParameter("size", 10).addParameter("code", "sz"+decimalFormat.format(code));
                 URL url = new URL(builder.build());
                 log.info("url is : {}",url);
                 String json = requestGet(url);
@@ -72,6 +75,7 @@ public class StockInitMapper extends AbstractMapper<List<StockInfo>, List<StockI
                 }
                 List<StockInfo> stockInfoList = Lists.newArrayListWithCapacity(100);
                 List<JSONObject> stockInfos = (List) JSON.parseObject(json).get("stocks");
+                log.info("stock count is : {}",stockInfos.size());
                 stockInfos.parallelStream()
                         .filter(item -> item.getString("name").length() <= 32)
                         .filter(item -> !redisManager.isInMap("stock", item.getString("code")))

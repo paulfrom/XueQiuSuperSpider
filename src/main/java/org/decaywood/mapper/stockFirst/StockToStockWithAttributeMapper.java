@@ -7,7 +7,6 @@ import org.decaywood.timeWaitingStrategy.TimeWaitingStrategy;
 import org.decaywood.utils.EmptyObject;
 import org.decaywood.utils.RequestParaBuilder;
 import org.decaywood.utils.URLMapper;
-import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.rmi.RemoteException;

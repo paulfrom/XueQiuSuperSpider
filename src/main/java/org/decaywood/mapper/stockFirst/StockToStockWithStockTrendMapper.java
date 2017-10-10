@@ -1,6 +1,7 @@
 package org.decaywood.mapper.stockFirst;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import lombok.extern.slf4j.Slf4j;
 import org.decaywood.entity.Stock;
 import org.decaywood.entity.trend.StockTrend;
 import org.decaywood.entity.trend.StockTrend.Period;
@@ -22,6 +23,7 @@ import java.util.List;
  * @author: decaywood
  * @date: 2015/11/24 15:23
  */
+@Slf4j
 public class StockToStockWithStockTrendMapper extends AbstractMapper<Stock, Stock> {
 
 
@@ -79,6 +81,8 @@ public class StockToStockWithStockTrendMapper extends AbstractMapper<Stock, Stoc
         String json = requestGet(url);
         JsonNode node = mapper.readTree(json).get("chartlist");
         processStock(stock, node);
+
+        log.info("stock is {}" , stock);
         return stock;
 
     }

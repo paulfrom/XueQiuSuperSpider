@@ -1,6 +1,7 @@
 package org.decaywood;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.decaywood.entity.Entry;
 import org.decaywood.remote.slaveChooser.RandomSlaveChooser;
 import org.decaywood.remote.slaveChooser.SlaveChooser;
@@ -21,6 +22,7 @@ import java.rmi.server.UnicastRemoteObject;
  * @author: decaywood
  * @date: 2015/12/4 13:35
  */
+@Slf4j
 public abstract class AbstractRemoteService extends UnicastRemoteObject {
 
     static {
@@ -67,6 +69,7 @@ public abstract class AbstractRemoteService extends UnicastRemoteObject {
     }
 
     protected String requestGet(URL url) throws IOException {
+        log.info("url is ====> {}",url);
         return new HttpRequestHelper(webSite).clientGetRequest(url);
     }
 

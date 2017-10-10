@@ -6,8 +6,11 @@ import org.decaywood.entity.trend.ShareHoldersTrend;
 import org.decaywood.entity.trend.StockTrend;
 import org.decaywood.utils.DateParser;
 import org.decaywood.utils.EmptyObject;
+import org.decaywood.utils.StringUtils;
 
 import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -361,6 +364,9 @@ public class Stock implements DeepCopy<Stock> {
 
     //雪球系统时间
     public void setTime(String time) {
+        if(StringUtils.nullOrEmpty(time)){
+            this.time = new Date();
+        }
         this.time = DateParser.parseToDate(time);
     }
 
