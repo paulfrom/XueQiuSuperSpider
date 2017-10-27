@@ -76,20 +76,20 @@ public abstract class GlobalSystemConfigLoader {
      */
     private static void loadSystemConfig() {
 
-        File file = FileLoader.loadFile("config.sys");
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            final String[] text = new String[1];
-            while ((text[0] = reader.readLine()) != null) {
-                if (filters.stream().noneMatch(x -> x.test(text[0]))) {
-                    String[] kv = text[0].split("=");
-                    String key = kv[0];
-                    String value = kv[1];
-                    System.setProperty(key.trim(), value.trim());
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("GlobalSystemConfigLoader -> 配置文件 -- config.sys 格式错误!");
-        }
+//        File file = FileLoader.loadFile("config.sys");
+//        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+//            final String[] text = new String[1];
+//            while ((text[0] = reader.readLine()) != null) {
+//                if (filters.stream().noneMatch(x -> x.test(text[0]))) {
+//                    String[] kv = text[0].split("=");
+//                    String key = kv[0];
+//                    String value = kv[1];
+//                    System.setProperty(key.trim(), value.trim());
+//                }
+//            }
+//        } catch (IOException e) {
+//            System.out.println("GlobalSystemConfigLoader -> 配置文件 -- config.sys 格式错误!");
+//        }
 
     }
 
@@ -99,20 +99,20 @@ public abstract class GlobalSystemConfigLoader {
      */
     private static void loadRMIConfig() {
 
-        File file = FileLoader.loadFile("config.rmi");
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            final String[] text = new String[1];
-            while ((text[0] = reader.readLine()) != null) {
-                if (filters.stream().noneMatch(x -> x.test(text[0]))) {
-                    String[] kv = text[0].split("=");
-                    String key = kv[0];
-                    String value = kv[1];
-                    RMIConfig.put(key.trim(), value.trim());
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("GlobalSystemConfigLoader -> 配置文件 -- config.rmi 格式错误!");
-        }
+//        File file = FileLoader.loadFile("config.rmi");
+//        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+//            final String[] text = new String[1];
+//            while ((text[0] = reader.readLine()) != null) {
+//                if (filters.stream().noneMatch(x -> x.test(text[0]))) {
+//                    String[] kv = text[0].split("=");
+//                    String key = kv[0];
+//                    String value = kv[1];
+//                    RMIConfig.put(key.trim(), value.trim());
+//                }
+//            }
+//        } catch (IOException e) {
+//            System.out.println("GlobalSystemConfigLoader -> 配置文件 -- config.rmi 格式错误!");
+//        }
     }
 
     /**

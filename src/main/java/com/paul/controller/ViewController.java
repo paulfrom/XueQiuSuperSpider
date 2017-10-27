@@ -2,6 +2,7 @@ package com.paul.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
+import com.paul.entity.CountLine;
 import com.paul.entity.MyGuideline;
 import com.paul.mapper.StockInfoMapper;
 import com.paul.mapper.StockMapper;
@@ -206,5 +207,10 @@ public class ViewController {
         });
 
         return null;
+    }
+
+    @GetMapping("/count")
+    public List<CountLine> count(){
+        return stockMapper.countByDate();
     }
 }

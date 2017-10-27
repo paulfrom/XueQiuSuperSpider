@@ -1,7 +1,11 @@
 package com.paul.mapper;
 
+import com.paul.entity.CountLine;
 import com.paul.utils.MyMapper;
 import org.decaywood.entity.Stock;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liusonglin
@@ -9,4 +13,5 @@ import org.decaywood.entity.Stock;
  * Description:
  */
 public interface StockMapper extends MyMapper<Stock> {
+    List<CountLine> countByDate();
 }

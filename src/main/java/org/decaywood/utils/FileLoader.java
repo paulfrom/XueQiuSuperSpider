@@ -24,7 +24,7 @@ public abstract class FileLoader {
      */
     public static String loadCookie(String key) {
         if(cookie.containsKey(key)) return cookie.get(key);
-        return "aliyungf_tc=AQAAADJ5HBZ9ow4Aam5fZZb4OUohw5q1; device_id=28495a45d3d6577d642e7244600a8794; remember=1; remember.sig=K4F3faYzmVuqC0iXIERCQf55g2Y; xq_a_token=33af30c6b9ef1df9548a4cc57089281e67c4da6c; xq_a_token.sig=JCGEngaNapPM9nUCJ6KVtCoipI8; xq_r_token=43cc430dcc418d08be4c009d897d00a7beeac5d2; xq_r_token.sig=ZYlc7KgvldhMJJaNJqd7GmRPQ1k; xq_is_login=1; xq_is_login.sig=J3LxgPVPUzbBg3Kee_PquUfih7Q; u=5499852316; u.sig=gDQ4yzeMrcEpajmUsnIeexPeqC8; s=f21a6iqu2x; bid=e1597e4c3067dd251c5130e8a0e0e73f_j7tuh692; __utma=1.1963207638.1505961347.1505961347.1505961347.1; __utmc=1; __utmz=1.1505961347.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); Hm_lvt_1db88642e346389874251b5a1eded6e3=1505961300; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1505961372; snbim_minify=true";
+        return "aliyungf_tc=AQAAAJTENx9x3w4Aam5fZWIz8oq5R6Qe; device_id=1a9ab19cbcdc164857fbaef9cb81b7cf; remember=1; remember.sig=K4F3faYzmVuqC0iXIERCQf55g2Y; xq_a_token=d9bca72c44f88596399d8ee7022a26bf5f5054ec; xq_a_token.sig=2A9LOt6vcIsKDpg7dWeF7ShsNv4; xq_r_token=8710f3472248543fc9a1fd93f2a8dc85e1edf1ba; xq_r_token.sig=niPLn0ttQTmmF2KrwIQ9raQzWFs; xq_is_login=1; xq_is_login.sig=J3LxgPVPUzbBg3Kee_PquUfih7Q; u=5499852316; u.sig=gDQ4yzeMrcEpajmUsnIeexPeqC8; s=ep1628jpc7; bid=e1597e4c3067dd251c5130e8a0e0e73f_j8zj26rg; Hm_lvt_1db88642e346389874251b5a1eded6e3=1508481701; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1508481710";
     }
 
 
@@ -83,39 +83,39 @@ public abstract class FileLoader {
      * @param rawPath 文件相对位置
      * @return File
      */
-    private static File loadFile(String rawPath, StringBuilder builder) {
-        String path = ROOT_PATH + rawPath;
-        File file = new File(path);
-
-        if(!file.exists()) return loadFile(builder.append("../").toString() + rawPath, builder);
-        else return file;
-    }
+//    private static File loadFile(String rawPath, StringBuilder builder) {
+//        String path = ROOT_PATH + rawPath;
+//        File file = new File(path);
+//
+//        if(!file.exists()) return loadFile(builder.append("../").toString() + rawPath, builder);
+//        else return file;
+//    }
 
     /**
      * 加载文件内容（文件必须存在）
      * @param rawPath 文件相对位置
      * @return 文件内容
      */
-    private static String loadFileContent(String rawPath, StringBuilder builder) {
-        File file = loadFile(rawPath, builder);
-        StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String text;
-            while ((text = reader.readLine()) != null) {
-                content.append(text);
-            }
-        } catch (IOException e) {
-            System.out.println("FileLoader -> 读取失败!");
-        }
-        return content.toString();
-    }
-
-    public static File loadFile(String rawPath) {
-        return loadFile(rawPath, new StringBuilder());
-    }
-
-    public static String loadFileContent(String rawPath) {
-        return loadFileContent(rawPath, new StringBuilder());
-    }
+//    private static String loadFileContent(String rawPath, StringBuilder builder) {
+//        File file = loadFile(rawPath, builder);
+//        StringBuilder content = new StringBuilder();
+//        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+//            String text;
+//            while ((text = reader.readLine()) != null) {
+//                content.append(text);
+//            }
+//        } catch (IOException e) {
+//            System.out.println("FileLoader -> 读取失败!");
+//        }
+//        return content.toString();
+//    }
+//
+//    public static File loadFile(String rawPath) {
+//        return loadFile(rawPath, new StringBuilder());
+//    }
+//
+//    public static String loadFileContent(String rawPath) {
+//        return loadFileContent(rawPath, new StringBuilder());
+//    }
 
 }

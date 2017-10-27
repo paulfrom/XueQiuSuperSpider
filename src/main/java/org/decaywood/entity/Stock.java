@@ -30,10 +30,8 @@ public class Stock implements DeepCopy<Stock> {
     private Long id;
 
 
-    @Getter
     @Setter
     private String stockName; //股票名称
-    @Getter
     @Setter
     private String stockNo; //股票代码
 

@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * Description:
  */
 @EnableAutoConfiguration
-@ComponentScan({"com.paul","org.decaywood.mapper"})
+@ComponentScan({"org.decaywood.mapper","com.paul"})
 @EnableScheduling
 public class AppApplication {
 

@@ -37,6 +37,9 @@ public abstract class DateParser {
         DateFormat dateFormat =
                 new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy", Locale.ENGLISH);
         try {
+            if(StringUtils.nullOrEmpty(time)){
+                return null;
+            }
             return dateFormat.parse(time);
         } catch (Exception e) {
             e.printStackTrace();

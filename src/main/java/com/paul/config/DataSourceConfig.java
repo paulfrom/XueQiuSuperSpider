@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
@@ -41,6 +42,11 @@ public class DataSourceConfig {
         druidDataSource.setTimeBetweenConnectErrorMillis(1000);
         druidDataSource.setTransactionThresholdMillis(3000);
         return druidDataSource;
+    }
+
+    @Bean
+    public PlatformTransactionManager annotationDrivenTransactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean("sqlSessionFactory")
