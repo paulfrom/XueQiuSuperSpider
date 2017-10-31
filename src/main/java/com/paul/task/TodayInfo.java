@@ -34,7 +34,7 @@ public class TodayInfo {
     @Autowired
     private ExtensionInfo extensionInfo;
 
-    @Scheduled(cron="0 10 15 * * ?")
+    @Scheduled(cron="0 30 17 * * ?")
     public void run(){
         log.info("start today info task");
         try {
