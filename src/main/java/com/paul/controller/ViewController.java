@@ -8,6 +8,7 @@ import com.paul.mapper.StockInfoMapper;
 import com.paul.mapper.StockMapper;
 import com.paul.utils.RedisManager;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.decaywood.entity.Entry;
 import org.decaywood.entity.Stock;
 import org.decaywood.entity.StockInfo;
@@ -188,20 +189,36 @@ public class ViewController {
             List<Stock> stockList = stockMapper.selectByExample(example);
             if(stockList.size()<2)return;
             stockList = stockList.parallelStream()
-                    .sorted(Comparator.comparing((s) -> new BigDecimal(s.getFloat_market_capital())))
+                    .sorted(Comparator.comparing((s) ->
+                            new BigDecimal(StringUtils.isNotBlank(s.getFloat_market_capital())?s.getFloat_market_capital():"0")))
                     .collect(Collectors.toList());
             BigDecimal minCapital,maxCapital;
-            maxCapital = new BigDecimal(stockList.parallelStream()
-                    .max(Comparator.comparing((s) -> new BigDecimal(s.getFloat_market_capital()))).get().getFloat_market_capital());
-            minCapital = new BigDecimal(stockList.parallelStream()
-                    .min(Comparator.comparing((s) -> new BigDecimal(s.getFloat_market_capital()))).get().getFloat_market_capital());
+            String maxCapitalStr = stockList
+                    .parallelStream()
+                    .max(Comparator.comparing((s) -> new BigDecimal(StringUtils.isNotBlank(s.getFloat_market_capital())?s.getFloat_market_capital():"0")))
+                    .get()
+                    .getFloat_market_capital();
+            maxCapital = new BigDecimal(StringUtils.isNotBlank(maxCapitalStr)?maxCapitalStr:"0");
+            String minCapitalStr = stockList
+                    .parallelStream()
+                    .min(Comparator.comparing((s) -> new BigDecimal(StringUtils.isNotBlank(s.getFloat_market_capital())?s.getFloat_market_capital():"0")))
+                    .get()
+                    .getFloat_market_capital();
+            minCapital = new BigDecimal(StringUtils.isNotBlank(minCapitalStr)?minCapitalStr:"0");
 
             BigDecimal minCLose,maxClose;
-
-            minCLose = new BigDecimal(stockList.parallelStream()
-                    .min(Comparator.comparing((s) -> new BigDecimal(s.getClose()))).get().getClose());
-            maxClose = new BigDecimal(stockList.parallelStream()
-                    .max(Comparator.comparing((s) -> new BigDecimal(s.getClose()))).get().getClose());
+            String minCLoseStr = stockList
+                    .parallelStream()
+                    .min(Comparator.comparing((s) -> new BigDecimal(s.getClose())))
+                    .get()
+                    .getClose();
+            minCLose = new BigDecimal(StringUtils.isNotBlank(minCLoseStr)?minCLoseStr:"0");
+            String maxCloseStr = stockList
+                    .parallelStream()
+                    .max(Comparator.comparing((s) -> new BigDecimal(s.getClose())))
+                    .get()
+                    .getClose();
+            maxClose = new BigDecimal(StringUtils.isNotBlank(maxCloseStr)?maxCloseStr:"0");
 
             double capitalRate = maxCapital.subtract(minCapital).doubleValue()/maxCapital.doubleValue();
 
