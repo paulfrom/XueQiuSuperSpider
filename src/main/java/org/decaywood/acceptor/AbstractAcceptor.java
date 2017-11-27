@@ -1,7 +1,6 @@
 package org.decaywood.acceptor;
 
 import org.decaywood.AbstractRemoteService;
-import org.decaywood.CookieProcessor;
 import org.decaywood.remote.RemoteAcceptor;
 import org.decaywood.timeWaitingStrategy.TimeWaitingStrategy;
 import org.decaywood.utils.URLMapper;
@@ -23,8 +22,7 @@ import java.util.function.Function;
 public abstract class AbstractAcceptor<T> extends AbstractRemoteService implements
         Consumer<T>,
         Function<T, T>,
-        RemoteAcceptor<T>,
-        CookieProcessor {
+        RemoteAcceptor<T>{
 
     public AbstractAcceptor() throws RemoteException {
         this(null);
@@ -61,7 +59,6 @@ public abstract class AbstractAcceptor<T> extends AbstractRemoteService implemen
                     } catch (Exception e) {
                         if(!(e instanceof IOException)) throw e;
                         System.out.println("Acceptor: Network busy Retrying -> " + loopTime + " times");
-                        updateCookie(webSite);
                         this.strategy.waiting(loopTime++);
                     }
                 }

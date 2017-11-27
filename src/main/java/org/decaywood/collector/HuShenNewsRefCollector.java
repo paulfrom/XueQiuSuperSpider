@@ -99,7 +99,6 @@ public class HuShenNewsRefCollector extends AbstractCollector<List<URL>> {
                     } catch (Exception e) {
                         if(!(e instanceof IOException)) throw e;
                         System.out.println("Collector: Network busy Retrying -> " + loopTime + " times");
-                        updateCookie(webSite);
                         this.strategy.waiting(loopTime++);
                     }
                 }

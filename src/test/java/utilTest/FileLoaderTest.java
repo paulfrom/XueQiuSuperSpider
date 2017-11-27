@@ -1,7 +1,5 @@
 package utilTest;
 
-import org.decaywood.utils.FileLoader;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
@@ -14,7 +12,6 @@ public class FileLoaderTest {
 
     @Test
     public void testFileLoader() {
-        FileLoader.updateCookie("I am a cookie", "baidu");
 //        File file = FileLoader.loadFile("config.sys");
 //        Assert.assertTrue(file.exists());
     }

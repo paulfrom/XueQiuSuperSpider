@@ -1,7 +1,6 @@
 package org.decaywood.filter;
 
 import org.decaywood.AbstractRemoteService;
-import org.decaywood.CookieProcessor;
 import org.decaywood.remote.RemoteFilter;
 import org.decaywood.timeWaitingStrategy.TimeWaitingStrategy;
 import org.decaywood.utils.URLMapper;
@@ -21,8 +20,7 @@ import java.util.function.Predicate;
  */
 public abstract class AbstractFilter<T> extends AbstractRemoteService implements
         Predicate<T>,
-        RemoteFilter<T>,
-        CookieProcessor {
+        RemoteFilter<T>{
 
 
     protected abstract boolean filterLogic(T t) throws Exception;
@@ -60,7 +58,6 @@ public abstract class AbstractFilter<T> extends AbstractRemoteService implements
                     } catch (Exception e) {
                         if(!(e instanceof IOException)) throw e;
                         System.out.println("Filter: Network busy Retrying -> " + loopTime + " times");
-                        updateCookie(webSite);
                         this.strategy.waiting(loopTime++);
                     }
                 }

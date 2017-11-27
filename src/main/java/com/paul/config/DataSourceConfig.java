@@ -5,8 +5,11 @@ import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.decaywood.entity.StockInfo;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.batch.MyBatisCursorItemReader;
+import org.mybatis.spring.batch.MyBatisPagingItemReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -103,6 +106,21 @@ public class DataSourceConfig {
         return mapperScannerConfigurer;
     }
 
+    @Bean
+    public MyBatisCursorItemReader<StockInfo> myBatisCursorItemReader(SqlSessionFactory sqlSessionFactory) throws Exception {
+        MyBatisCursorItemReader<StockInfo> cursorItemReader = new MyBatisCursorItemReader();
+        cursorItemReader.setQueryId("com.paul.mapper.StockInfoMapper.select");
+        cursorItemReader.setSqlSessionFactory(sqlSessionFactory);
+        cursorItemReader.afterPropertiesSet();
+        return cursorItemReader;
+    }
 
-
+    @Bean
+    public MyBatisPagingItemReader<StockInfo> myBatisPagingItemReader(SqlSessionFactory sqlSessionFactory) throws Exception {
+        MyBatisPagingItemReader<StockInfo> pagingItemReader = new MyBatisPagingItemReader();
+        pagingItemReader.setQueryId("com.paul.mapper.StockInfoMapper.select");
+        pagingItemReader.setSqlSessionFactory(sqlSessionFactory);
+        pagingItemReader.afterPropertiesSet();
+        return pagingItemReader;
+    }
 }

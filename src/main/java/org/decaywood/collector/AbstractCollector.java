@@ -1,7 +1,6 @@
 package org.decaywood.collector;
 
 import org.decaywood.AbstractRemoteService;
-import org.decaywood.CookieProcessor;
 import org.decaywood.remote.RemoteCollector;
 import org.decaywood.timeWaitingStrategy.TimeWaitingStrategy;
 import org.decaywood.utils.URLMapper;
@@ -24,8 +23,7 @@ import java.util.function.Supplier;
  */
 public abstract class AbstractCollector<T> extends AbstractRemoteService implements
         Supplier<T>,
-        RemoteCollector<T>,
-        CookieProcessor {
+        RemoteCollector<T>{
 
     /**
      * 收集器收集逻辑,由子类实现
@@ -69,7 +67,6 @@ public abstract class AbstractCollector<T> extends AbstractRemoteService impleme
                     } catch (Exception e) {
                         if(!(e instanceof IOException)) throw e;
                         System.out.println("Collector: Network busy Retrying -> " + loopTime + " times");
-                        updateCookie(webSite);
                         this.strategy.waiting(loopTime++);
                     }
                 }

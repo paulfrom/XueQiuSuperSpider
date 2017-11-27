@@ -2,7 +2,6 @@ package org.decaywood.mapper;
 
 import lombok.extern.slf4j.Slf4j;
 import org.decaywood.AbstractRemoteService;
-import org.decaywood.CookieProcessor;
 import org.decaywood.entity.DeepCopy;
 import org.decaywood.remote.RemoteMapper;
 import org.decaywood.timeWaitingStrategy.TimeWaitingStrategy;
@@ -20,8 +19,7 @@ import java.util.function.Function;
 @Slf4j
 public abstract class AbstractMapper <T, R> extends AbstractRemoteService implements
         Function<T, R>,
-        RemoteMapper<T, R>,
-        CookieProcessor {
+        RemoteMapper<T, R>{
 
 
     protected abstract R mapLogic(T t) throws Exception;
@@ -61,7 +59,6 @@ public abstract class AbstractMapper <T, R> extends AbstractRemoteService implem
                     } catch (Exception e) {
                         if (!(e instanceof IOException)) throw e;
                         log.info("Mapper: Network busy Retrying -> " + loopTime + " times" + "  " + this.getClass().getSimpleName());
-                        updateCookie(webSite);
                         this.strategy.waiting(loopTime++);
                     }
                 }

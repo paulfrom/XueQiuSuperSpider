@@ -15,6 +15,10 @@ import org.decaywood.entity.trend.StockTrend;
 import org.decaywood.mapper.stockFirst.StockInitMapper;
 import org.decaywood.mapper.stockFirst.StockToStockWithStockTrendMapper;
 import org.decaywood.utils.MathUtils;
+import org.mybatis.spring.batch.MyBatisCursorItemReader;
+import org.mybatis.spring.batch.MyBatisPagingItemReader;
+import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
+import java.lang.reflect.Parameter;
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
@@ -57,6 +62,12 @@ public class ViewController {
 
     @Autowired
     StockMapper stockMapper;
+
+    @Autowired
+    MyBatisCursorItemReader<StockInfo> myBatisCursorItemReader;
+
+    @Autowired
+    MyBatisPagingItemReader<StockInfo> myBatisPagingItemReader;
 
     @GetMapping("/index")
     public StockInfo stringList(){
@@ -212,5 +223,49 @@ public class ViewController {
     @GetMapping("/count")
     public List<CountLine> count(){
         return stockMapper.countByDate();
+    }
+
+
+    @GetMapping("/test")
+    public Integer test() throws Exception {
+        try{
+//            Map<String,Object> para = new HashMap<>(1);
+//            para.put("hasexist","true");
+//            myBatisCursorItemReader.setParameterValues(para);
+            myBatisCursorItemReader.open(new ExecutionContext());
+            List<StockInfo> stockInfoList = new ArrayList(10);
+            StockInfo stockInfo;
+            while ((stockInfo=myBatisCursorItemReader.read())!=null) {
+                stockInfoList.add(stockInfo);
+            }
+            return stockInfoList.size();
+        }catch(Exception e){
+            //do some
+        }finally{
+            myBatisCursorItemReader.close();
+        }
+        return null;
+    }
+
+    @GetMapping("/testone")
+    public Integer testone() throws Exception {
+        try{
+//            Map<String,Object> para = new HashMap<>(1);
+//            para.put("hasexist","true");
+//            myBatisCursorItemReader.setParameterValues(para);
+            myBatisPagingItemReader.open(new ExecutionContext());
+            myBatisPagingItemReader.setPageSize(10);
+            List<StockInfo> stockInfoList = new ArrayList(10);
+            StockInfo stockInfo;
+            while ((stockInfo=myBatisPagingItemReader.read())!=null) {
+                stockInfoList.add(stockInfo);
+            }
+            return stockInfoList.size();
+        }catch(Exception e){
+            //do some
+        }finally{
+            myBatisCursorItemReader.close();
+        }
+        return null;
     }
 }

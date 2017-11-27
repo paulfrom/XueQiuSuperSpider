@@ -1,7 +1,6 @@
 package org.decaywood;
 
 import org.decaywood.entity.Entry;
-import org.decaywood.utils.FileLoader;
 
 import java.io.BufferedReader;
 import java.io.File;
